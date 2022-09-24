@@ -48,6 +48,9 @@ li a {
 footer{
     color: rgb(158, 158, 158);
     font-size: 14px;
+    
+    position: relative;
+    
     margin-top: 30px;
 }
 #dlt-btn{

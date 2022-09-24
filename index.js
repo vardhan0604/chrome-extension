@@ -3,7 +3,13 @@ const inputBtn = document.getElementById("input-btn")
 const inputEl=document.getElementById("input-el");
 const ulEl=document.getElementById("ul-el");
 const dltBtn=document.getElementById("dlt-btn");
-const tabBtn=document.getElementById("tab-btn")
+const tabBtn=document.getElementById("tab-btn");
+
+
+
+
+
+
 
 const leadsFromLocalStorage = JSON.parse( localStorage.getItem("myLeads") )
 if(leadsFromLocalStorage){
@@ -19,7 +25,7 @@ inputBtn.addEventListener("click", function() {
 
     // store myleads in the local storage
     localStorage.setItem("myLeads",JSON.stringify(myLeads));
-    console.log(localStorage.getItem("myLeads"));
+    // console.log(localStorage.getItem("myLeads"));
 
 // call output function
     output(myLeads)
@@ -42,9 +48,29 @@ function output(leads){
 
 }
 
+
+
+
+tabBtn.addEventListener("click",function() {
+
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+
+    myLeads.push(tabs[0].url)
+    localStorage.setItem("myLeads",JSON.stringify(myLeads));
+    output(myLeads)
+
+
+    })
+
+
+    
+    
+
+})
 dltBtn.addEventListener("dblclick",function () {
-    localStorage.clear;
-    myLeads=[]
-     output(myLeads);
+    
+    myLeads=[];
+    output(myLeads);
+    localStorage.clear();
 
 })
